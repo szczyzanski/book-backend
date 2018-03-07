@@ -13,8 +13,6 @@ public class BookService{
     private BookRepository bookRepository;
 
     public List<Book> findAll() {
-        bookRepository.save(new Book("Ciasteczko", "Bumbum"));
-        bookRepository.save(new Book("Czechoslowacja", "to nasza nacja"));
         return (List) bookRepository.findAll();
     }
 }

@@ -1,25 +1,31 @@
 package szczyzanski.book.domain.entities;
 
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "books")
 public class Book {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Long id;
 
+    @Column(name = "title")
     private String title;
 
-    private String author;
+    @Column(name = "fName")
+    private String authorsFirstname;
+
+    @Column(name = "sName")
+    private String authorsSurname;
 
     Book() {}
 
-    public Book(final String title, final String author) {
+    public Book(final String title, final String authorsFirstname, final String authorsSurname) {
         this.title = title;
-        this.author = author;
+        this.authorsFirstname = authorsFirstname;
+        this.authorsSurname = authorsSurname;
     }
 
     public Long getId() {
@@ -30,16 +36,24 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorsFirstname() {
+        return authorsFirstname;
+    }
+
+    public String getAuthorsSurname() {
+        return authorsSurname;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorsFirstname(String authorsFirstname) {
+        this.authorsFirstname = authorsFirstname;
+    }
+
+    public void setAuthorsSurname(String authorsSurname) {
+        this.authorsSurname = authorsSurname;
     }
 
     @Override
@@ -57,6 +71,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return title + " by " + author;
+        return title + " by " + authorsFirstname + " " + authorsSurname;
     }
 }
