@@ -14,18 +14,14 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "fName")
-    private String authorsFirstname;
-
-    @Column(name = "sName")
-    private String authorsSurname;
+    @Column(name = "author_id")
+    private Long authorId;
 
     Book() {}
 
-    public Book(final String title, final String authorsFirstname, final String authorsSurname) {
+    public Book(final String title, final Long authorId) {
         this.title = title;
-        this.authorsFirstname = authorsFirstname;
-        this.authorsSurname = authorsSurname;
+        this.authorId = authorId;
     }
 
     public Long getId() {
@@ -36,24 +32,16 @@ public class Book {
         return title;
     }
 
-    public String getAuthorsFirstname() {
-        return authorsFirstname;
-    }
-
-    public String getAuthorsSurname() {
-        return authorsSurname;
+    public Long getAuthorId() {
+        return authorId;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setAuthorsFirstname(String authorsFirstname) {
-        this.authorsFirstname = authorsFirstname;
-    }
-
-    public void setAuthorsSurname(String authorsSurname) {
-        this.authorsSurname = authorsSurname;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     @Override
@@ -71,6 +59,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return title + " by " + authorsFirstname + " " + authorsSurname;
+        return title + " by author with id: " + authorId;
     }
 }

@@ -15,4 +15,8 @@ public class BookService{
     public List<Book> findAll() {
         return (List) bookRepository.findAll();
     }
+
+    public void saveDefault() {
+        bookRepository.save(new Book("Barti", 1L));
+    }
 }
