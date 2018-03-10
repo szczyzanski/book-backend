@@ -9,7 +9,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -17,7 +17,7 @@ public class Book {
     @Column(name = "author_id")
     private Long authorId;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(targetEntity = Shelf.class)
     private Shelf shelf;
 
     Book() {}

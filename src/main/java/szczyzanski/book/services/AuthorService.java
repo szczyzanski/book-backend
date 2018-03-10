@@ -19,4 +19,12 @@ public class AuthorService {
     public void saveDefault() {
         authorRepository.save(new Author("Jason", "Kapusta"));
     }
+
+    public Author getOne(final Long id) {
+        return authorRepository.findById(id).get();
+    }
+
+    public void addAuthor(final String fName, final String sName) {
+        authorRepository.save(new Author(fName, sName));
+    }
 }

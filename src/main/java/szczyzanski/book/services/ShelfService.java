@@ -24,4 +24,8 @@ public class ShelfService {
     public Shelf findById() {
         return this.shelfRepository.findById(1L).get();
     }
+
+    public Shelf getOne(Long id) {
+        return this.shelfRepository.findById(id).get();
+    }
 }

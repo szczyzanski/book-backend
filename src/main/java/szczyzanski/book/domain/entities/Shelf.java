@@ -11,21 +11,21 @@ public class Shelf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "room")
-    int room;
+    private int room;
 
     @Column(name = "x_row")
-    int row;
+    private int row;
 
     @Column(name = "y_column")
-    int column;
+    private int column;
 
     @Column(name = "test_shelf", nullable = false)
-    boolean test = false;
+    private boolean test = false;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, mappedBy = "shelf")
     private List<Book> bookList = new ArrayList<Book>();
 
     Shelf() {}
@@ -56,6 +56,10 @@ public class Shelf {
         return test;
     }
 
+    public List<Book> getBookList() {
+        return this.bookList;
+    }
+
     public void setRoom(int room) {
         this.room = room;
     }
@@ -70,6 +74,10 @@ public class Shelf {
 
     public void setTest(boolean test) {
         this.test = test;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override
