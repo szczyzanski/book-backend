@@ -17,11 +17,15 @@ public class Book {
     @Column(name = "author_id")
     private Long authorId;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Shelf shelf;
+
     Book() {}
 
-    public Book(final String title, final Long authorId) {
+    public Book(final String title, final Long authorId, final Shelf shelf) {
         this.title = title;
         this.authorId = authorId;
+        this.shelf = shelf;
     }
 
     public Long getId() {
@@ -36,12 +40,20 @@ public class Book {
         return authorId;
     }
 
+    public Shelf getShelf() {
+        return this.shelf;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public void setShelf(Shelf shelf) {
+        this.shelf = shelf;
     }
 
     @Override
