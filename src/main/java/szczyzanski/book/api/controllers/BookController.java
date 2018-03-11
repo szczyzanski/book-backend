@@ -1,12 +1,15 @@
 package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import szczyzanski.book.api.dto.BookDTO;
 import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.services.BookService;
 import szczyzanski.book.services.ShelfService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,14 +19,28 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private ShelfService shelfService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @RequestMapping(value = "/all")
-    public List<Book> findAll() {
-        return bookService.findAll();
+    public List<BookDTO> findAll() {
+        List<Book> bookList = bookService.findAll();
+        List<BookDTO> result = new ArrayList<BookDTO>();
+        for(Book book : bookList) {
+            result.add(entityToDTO(book));
+        }
+        return result;
     }
 
     @RequestMapping(value = "/savedef")
     public void saveDefault() {
         bookService.saveDefault(shelfService.findById());
+    }
+
+    private BookDTO entityToDTO(final Book book) {
+        if(book == null) {
+            return null;
+        }
+        return modelMapper.map(book, BookDTO.class);
     }
 }
