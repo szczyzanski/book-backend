@@ -44,36 +44,36 @@ public class Shelf {
         return room;
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public boolean isTest() {
-        return test;
-    }
-
-    public List<Book> getBookList() {
-        return this.bookList;
-    }
-
     public void setRoom(int room) {
         this.room = room;
+    }
+
+    public int getRow() {
+        return row;
     }
 
     public void setRow(int row) {
         this.row = row;
     }
 
+    public int getColumn() {
+        return column;
+    }
+
     public void setColumn(int column) {
         this.column = column;
     }
 
+    public boolean isTest() {
+        return test;
+    }
+
     public void setTest(boolean test) {
         this.test = test;
+    }
+
+    public List<Book> getBookList() {
+        return this.bookList;
     }
 
     public void setBookList(List<Book> bookList) {

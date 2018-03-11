@@ -13,19 +13,15 @@ public class ShelfService {
     private ShelfRepository shelfRepository;
 
     public List<Shelf> findAll() {
-        return (List) this.shelfRepository.findAll();
+        return (List) shelfRepository.findAll();
     }
 
     public void saveDefault() {
-        this.shelfRepository.save(new Shelf(1, 1, 1));
+        shelfRepository.save(new Shelf(1, 1, 1));
     }
 
     //TEST
-    public Shelf findById() {
-        return this.shelfRepository.findById(1L).get();
-    }
-
-    public Shelf getOne(Long id) {
-        return this.shelfRepository.findById(id).get();
+    public Shelf findById(final Long id) {
+        return shelfRepository.findById(id).get();
     }
 }

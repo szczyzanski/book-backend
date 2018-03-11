@@ -34,7 +34,7 @@ public class BookController {
 
     @RequestMapping(value = "/savedef")
     public void saveDefault() {
-        bookService.saveDefault(shelfService.findById());
+        bookService.saveDefault(shelfService.findById(1L));
     }
 
     private BookDTO entityToDTO(final Book book) {

@@ -36,20 +36,20 @@ public class Book {
         return title;
     }
 
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public Shelf getShelf() {
-        return this.shelf;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public Long getAuthorId() {
+        return authorId;
+    }
+
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public Shelf getShelf() {
+        return this.shelf;
     }
 
     public void setShelf(Shelf shelf) {

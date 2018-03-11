@@ -32,12 +32,12 @@ public class Author {
         return firstName;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public void setSurname(String surname) {
