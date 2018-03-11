@@ -99,7 +99,12 @@ public class Shelf {
     }
 
     public void addBook(Book book) {
-        this.bookList.add(book);
+        bookList.add(book);
+        book.setShelf(this);
+    }
+
+    public void removeBook(Book book) {
+        bookList.add(book);
         book.setShelf(this);
     }
 }

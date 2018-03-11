@@ -2,11 +2,13 @@ package szczyzanski.book.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import szczyzanski.book.domain.entities.Author;
 import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.domain.entities.Shelf;
 import szczyzanski.book.domain.repositiories.BookRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookService{
@@ -17,9 +19,12 @@ public class BookService{
         return (List) bookRepository.findAll();
     }
 
-    public void saveDefault(Shelf shelf) {
-        Book book = new Book("Barti", 1L, shelf);
+    public void saveDefault(Shelf shelf, Set<Author> authorSet) {
+        Book book = new Book("Barti", shelf, authorSet);
         shelf.addBook(book);
-        bookRepository.save(new Book("Barti", 1L, shelf));
+        for(Author author : authorSet) {
+            author.addBook(book);
+        }
+        bookRepository.save(book);
     }
 }

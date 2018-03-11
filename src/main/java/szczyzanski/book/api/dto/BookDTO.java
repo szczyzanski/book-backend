@@ -1,10 +1,16 @@
 package szczyzanski.book.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.Set;
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class BookDTO {
     private Long id;
     private String title;
-    private Long authorId;
-    private ShelfDTO shelfDTO;
+    private ShelfDTO shelf;
+    private Set<AuthorDTO> authorSet;
 
     BookDTO() {}
 
@@ -24,20 +30,20 @@ public class BookDTO {
         this.title = title;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public ShelfDTO getShelf() {
+        return shelf;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setShelf(ShelfDTO shelf) {
+        this.shelf = shelf;
     }
 
-    public ShelfDTO getShelfDTO() {
-        return shelfDTO;
+    public Set<AuthorDTO> getAuthorSet() {
+        return authorSet;
     }
 
-    public void setShelfDTO(ShelfDTO shelfDTO) {
-        this.shelfDTO = shelfDTO;
+    public void setAuthorSet(Set<AuthorDTO> authorSet) {
+        this.authorSet = authorSet;
     }
 
     @Override

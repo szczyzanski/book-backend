@@ -58,6 +58,6 @@ public class AuthorController {
     }
 
     private Author DTOToEntity(final AuthorDTO authorDTO) {
-        return new Author(authorDTO.getFirstName(), authorDTO.getSurname());
+        return new Author(authorDTO.getFirstName(), authorDTO.getSurname(), null);
     }
 }

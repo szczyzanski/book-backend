@@ -1,11 +1,18 @@
 package szczyzanski.book.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.List;
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class ShelfDTO {
     private Long id;
     private int room;
     private int row;
     private int column;
     private boolean test;
+    private List<BookDTO> bookList;
 
     public Long getId() {
         return id;
@@ -45,6 +52,14 @@ public class ShelfDTO {
 
     public void setTest(boolean test) {
         this.test = test;
+    }
+
+    public List<BookDTO> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<BookDTO> bookList) {
+        this.bookList = bookList;
     }
 
     @Override
