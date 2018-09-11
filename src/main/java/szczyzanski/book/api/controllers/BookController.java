@@ -2,6 +2,7 @@ package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import szczyzanski.book.api.dto.BookDTO;
@@ -10,6 +11,7 @@ import szczyzanski.book.services.AuthorService;
 import szczyzanski.book.services.BookService;
 import szczyzanski.book.services.ShelfService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +47,10 @@ public class BookController {
             return null;
         }
         return modelMapper.map(book, BookDTO.class);
+    }
+
+    @RequestMapping(value = "/isbn/{isbn}")
+    public Book findByIsbn(@PathVariable long isbn) throws IOException {
+        return bookService.findByIsbn(isbn);
     }
 }

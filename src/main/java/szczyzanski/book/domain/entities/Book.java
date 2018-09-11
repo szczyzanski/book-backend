@@ -16,13 +16,22 @@ public class Book {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "isbn")
+    private Long isbn;
+
+    @Column(name = "publisher")
+    private String publisher;
+
+    @Column(name = "number_of_pages")
+    private String noOfPages;
+
     @ManyToOne(targetEntity = Shelf.class)
     private Shelf shelf;
 
     @ManyToMany(targetEntity = Author.class, mappedBy = "bookSet")
     private Set<Author> authorSet = new HashSet<Author>();
 
-    Book() {}
+    public Book() {}
 
     public Book(final String title, final Shelf shelf, final Set<Author> authorSet) {
         this.title = title;
