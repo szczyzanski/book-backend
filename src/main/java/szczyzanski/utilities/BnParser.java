@@ -210,7 +210,7 @@ public class BnParser {
         return result;
     }
 
-    private static String parseNoOfPages(String line) {
+    public static String parseNoOfPages(String line) {
         String result = line;
         result = result.substring(4);
         Pattern pattern = Pattern.compile("\\d+");
