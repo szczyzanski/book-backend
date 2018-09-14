@@ -10,6 +10,7 @@ import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.services.AuthorService;
 import szczyzanski.book.services.BookService;
 import szczyzanski.book.services.ShelfService;
+import szczyzanski.exceptions.BNRecordParsingException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/isbn/{isbn}")
-    public Book findByIsbn(@PathVariable long isbn) throws IOException {
-        return bookService.findByIsbn(isbn);
+    public Book findByIsbn(@PathVariable long isbn) throws IOException, BNRecordParsingException {
+        return bookService.findOnBnCatalogByIsbn(isbn);
     }
 }

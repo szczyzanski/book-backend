@@ -13,23 +13,32 @@ public class Book {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "isbn")
     private Long isbn;
+
+    @ManyToMany(targetEntity = Author.class, mappedBy = "bookSet")
+    private Set<Author> authorSet = new HashSet<>();
+
+    @Column(name = "number_of_pages")
+    private int noOfPages;
+
+    @Column(name = "original_title")
+    private String originalTitile;
+
+    @Column(name = "origin")
+    private String origin;
 
     @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "number_of_pages")
-    private String noOfPages;
+    @Column(name = "tag")
+    private String tagSet;
+
+    @Column(name = "title")
+    private String title;
 
     @ManyToOne(targetEntity = Shelf.class)
     private Shelf shelf;
-
-    @ManyToMany(targetEntity = Author.class, mappedBy = "bookSet")
-    private Set<Author> authorSet = new HashSet<Author>();
 
     public Book() {}
 
@@ -41,6 +50,54 @@ public class Book {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(Long isbn) {
+        this.isbn = isbn;
+    }
+
+    public int getNoOfPages() {
+        return noOfPages;
+    }
+
+    public void setNoOfPages(int noOfPages) {
+        this.noOfPages = noOfPages;
+    }
+
+    public String getOriginalTitile() {
+        return originalTitile;
+    }
+
+    public void setOriginalTitile(String originalTitile) {
+        this.originalTitile = originalTitile;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getTagSet() {
+        return tagSet;
+    }
+
+    public void setTagSet(String tagSet) {
+        this.tagSet = tagSet;
     }
 
     public String getTitle() {
@@ -83,7 +140,14 @@ public class Book {
     //TODO add authors names
     @Override
     public String toString() {
-        return title + " by author with id: ";
+        return      "Title: " + title + System.getProperty("line.separator")
+                +   "Authors: " + System.getProperty("line.separator")
+                +   "ISBN: " + isbn + System.getProperty("line.separator")
+                +   "Number of pages: " + noOfPages + System.getProperty("line.separator")
+                +   "Original title: " + originalTitile + System.getProperty("line.separator")
+                +   "Origin: " + origin + System.getProperty("line.separator")
+                +   "Publisher: " + publisher + System.getProperty("line.separator")
+                +   "Tags: ";
     }
 
     public void addAuthor(Author author) {
