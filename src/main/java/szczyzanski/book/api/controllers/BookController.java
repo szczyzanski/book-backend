@@ -31,16 +31,17 @@ public class BookController {
     @RequestMapping(value = "/all")
     public List<BookDTO> findAll() {
         List<Book> bookList = bookService.findAll();
-        List<BookDTO> result = new ArrayList<BookDTO>();
+        List<BookDTO> result = new ArrayList<>();
         for(Book book : bookList) {
             result.add(entityToDTO(book));
         }
         return result;
     }
 
-    @RequestMapping(value = "/savedef")
-    public void saveDefault() {
-        bookService.saveDefault(shelfService.findById(1L), authorService.getDefaultSet());
+    @RequestMapping(value = "/isbn/{isbn}")
+    public BookDTO findByIsbn(@PathVariable long isbn) throws BNRecordParsingException {
+        Book book = bookService.findOnBnCatalogByIsbn(isbn);
+        return entityToDTO(book);
     }
 
     private BookDTO entityToDTO(final Book book) {
@@ -48,10 +49,5 @@ public class BookController {
             return null;
         }
         return modelMapper.map(book, BookDTO.class);
-    }
-
-    @RequestMapping(value = "/isbn/{isbn}")
-    public Book findByIsbn(@PathVariable long isbn) throws IOException, BNRecordParsingException {
-        return bookService.findOnBnCatalogByIsbn(isbn);
     }
 }

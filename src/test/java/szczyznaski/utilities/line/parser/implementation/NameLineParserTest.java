@@ -3,8 +3,8 @@ package szczyznaski.utilities.line.parser.implementation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import szczyzanski.exceptions.MalformedLineException;
-import szczyzanski.entities.builders.line.parser.LineParser;
-import szczyzanski.entities.builders.line.parser.implementation.NameLineParser;
+import szczyzanski.entities.builders.bn.catalog.parser.line.parser.LineParser;
+import szczyzanski.entities.builders.bn.catalog.parser.line.parser.implementation.NameLineParser;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

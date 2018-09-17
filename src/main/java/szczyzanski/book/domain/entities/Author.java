@@ -2,7 +2,6 @@ package szczyzanski.book.domain.entities;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,8 +12,8 @@ public class Author {
     @Column(name = "id")
     Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "forname")
+    private String forname;
 
     @Column(name = "surname")
     private String surname;
@@ -23,12 +22,12 @@ public class Author {
     @JoinTable(name = "authors_books",
                 joinColumns = {@JoinColumn(name = "authors_id")},
                 inverseJoinColumns = {@JoinColumn(name = "books_id")})
-    private Set<Book> bookSet = new HashSet<Book>();
+    private Set<Book> bookSet = new HashSet<>();
 
     Author() {}
 
-    public Author(final String firstName, final String surname, final Set<Book> bookSet) {
-        this.firstName = firstName;
+    public Author(final String forname, final String surname, final Set<Book> bookSet) {
+        this.forname = forname;
         this.surname = surname;
         this.bookSet = bookSet;
     }
@@ -37,12 +36,12 @@ public class Author {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getForname() {
+        return forname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setForname(String forname) {
+        this.forname = forname;
     }
 
     public String getSurname() {
@@ -77,7 +76,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return firstName + " " + surname;
+        return forname + " " + surname;
     }
 
     public void addBook(Book book) {

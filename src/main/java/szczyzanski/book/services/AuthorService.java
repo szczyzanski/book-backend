@@ -21,6 +21,7 @@ public class AuthorService {
     public void saveDefault() {
         authorRepository.save(new Author("Jason", "Kapusta", null));
         authorRepository.save(new Author("Marek", "Kurwisyn", null));
+        authorRepository.save(new Author("Jason", "Mistyczny", null));
     }
 
     public Author getOne(final Long id) {
@@ -32,9 +33,13 @@ public class AuthorService {
     }
 
     public Set<Author> getDefaultSet() {
-        Set<Author> authorSet = new HashSet<Author>();
+        Set<Author> authorSet = new HashSet<>();
         authorSet.add(getOne(1L));
         authorSet.add(getOne(2L));
         return authorSet;
+    }
+
+    public Set<Author> findByForname(final String forname, final String surname) {
+        return authorRepository.findByName(forname, surname);
     }
 }

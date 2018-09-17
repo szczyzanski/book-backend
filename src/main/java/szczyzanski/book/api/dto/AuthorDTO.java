@@ -8,7 +8,7 @@ import java.util.Set;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class AuthorDTO {
     private Long id;
-    private String firstName;
+    private String forname;
     private String surname;
     private Set<BookDTO> bookSet;
 
@@ -22,12 +22,12 @@ public class AuthorDTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getForname() {
+        return forname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setForname(String forname) {
+        this.forname = forname;
     }
 
     public String getSurname() {
@@ -48,6 +48,6 @@ public class AuthorDTO {
 
     @Override
     public String toString() {
-        return firstName + " " + surname;
+        return forname + " " + surname;
     }
 }

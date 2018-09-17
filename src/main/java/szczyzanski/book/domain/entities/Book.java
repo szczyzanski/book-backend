@@ -14,16 +14,16 @@ public class Book {
     private Long id;
 
     @Column(name = "isbn")
-    private Long isbn;
+    private long isbn;
 
     @ManyToMany(targetEntity = Author.class, mappedBy = "bookSet")
-    private Set<Author> authorSet = new HashSet<>();
+    private Set<Author> authorSet;
 
     @Column(name = "number_of_pages")
     private int noOfPages;
 
     @Column(name = "original_title")
-    private String originalTitile;
+    private String originalTitle;
 
     @Column(name = "origin")
     private String origin;
@@ -31,8 +31,8 @@ public class Book {
     @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "tag")
-    private String tagSet;
+    @ManyToMany(targetEntity = Tag.class, mappedBy = "bookSet")
+    private Set<Tag> tagSet;
 
     @Column(name = "title")
     private String title;
@@ -42,21 +42,29 @@ public class Book {
 
     public Book() {}
 
-    public Book(final String title, final Shelf shelf, final Set<Author> authorSet) {
+    public Book(long isbn, Set<Author> authorSet, int noOfPages,
+                String originalTitle, String origin, String publisher,
+                Set<Tag> tagSet, String title, Shelf shelf) {
+        this.isbn = isbn;
+        this.authorSet = authorSet;
+        this.noOfPages = noOfPages;
+        this.originalTitle = originalTitle;
+        this.origin = origin;
+        this.publisher = publisher;
+        this.tagSet = tagSet;
         this.title = title;
         this.shelf = shelf;
-        this.authorSet = authorSet;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getIsbn() {
+    public long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(long isbn) {
         this.isbn = isbn;
     }
 
@@ -68,12 +76,12 @@ public class Book {
         this.noOfPages = noOfPages;
     }
 
-    public String getOriginalTitile() {
-        return originalTitile;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public void setOriginalTitile(String originalTitile) {
-        this.originalTitile = originalTitile;
+    public void setOriginalTitle(String originalTitile) {
+        this.originalTitle = originalTitile;
     }
 
     public String getOrigin() {
@@ -92,11 +100,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public String getTagSet() {
+    public Set<Tag> getTagSet() {
         return tagSet;
     }
 
-    public void setTagSet(String tagSet) {
+    public void setTagSet(Set<Tag> tagSet) {
         this.tagSet = tagSet;
     }
 
@@ -129,12 +137,12 @@ public class Book {
         if(this == o) return true;
         if(!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id);
+        return Objects.equals(id, book.id) && Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, isbn);
     }
 
     //TODO add authors names
@@ -144,7 +152,7 @@ public class Book {
                 +   "Authors: " + System.getProperty("line.separator")
                 +   "ISBN: " + isbn + System.getProperty("line.separator")
                 +   "Number of pages: " + noOfPages + System.getProperty("line.separator")
-                +   "Original title: " + originalTitile + System.getProperty("line.separator")
+                +   "Original title: " + originalTitle + System.getProperty("line.separator")
                 +   "Origin: " + origin + System.getProperty("line.separator")
                 +   "Publisher: " + publisher + System.getProperty("line.separator")
                 +   "Tags: ";

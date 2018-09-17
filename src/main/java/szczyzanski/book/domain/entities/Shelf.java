@@ -22,11 +22,8 @@ public class Shelf {
     @Column(name = "y_column")
     private int column;
 
-    @Column(name = "test_shelf", nullable = false)
-    private boolean test = false;
-
     @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, mappedBy = "shelf")
-    private List<Book> bookList = new ArrayList<Book>();
+    private List<Book> bookList = new ArrayList<>();
 
     Shelf() {}
 
@@ -62,14 +59,6 @@ public class Shelf {
 
     public void setColumn(int column) {
         this.column = column;
-    }
-
-    public boolean isTest() {
-        return test;
-    }
-
-    public void setTest(boolean test) {
-        this.test = test;
     }
 
     public List<Book> getBookList() {

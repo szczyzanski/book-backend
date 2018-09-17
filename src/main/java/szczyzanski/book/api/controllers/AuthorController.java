@@ -11,6 +11,7 @@ import szczyzanski.book.services.AuthorService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/authors")
@@ -50,6 +51,11 @@ public class AuthorController {
         return entityToDTO(authorService.add(DTOToEntity(authorDTO)));
     }
 
+    @RequestMapping(value = "/name")
+    public Set<Author> findByName() {
+        return authorService.findByForname("Jason", "Mistyczny");
+    }
+
     private AuthorDTO entityToDTO(final Author author) {
         if (author == null) {
             return null;
@@ -58,6 +64,6 @@ public class AuthorController {
     }
 
     private Author DTOToEntity(final AuthorDTO authorDTO) {
-        return new Author(authorDTO.getFirstName(), authorDTO.getSurname(), null);
+        return new Author(authorDTO.getForname(), authorDTO.getSurname(), null);
     }
 }

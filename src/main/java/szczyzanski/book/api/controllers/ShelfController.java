@@ -24,7 +24,7 @@ public class ShelfController {
     @RequestMapping(value = "/all")
     public List<ShelfDTO> findAll() {
         List<Shelf> shelfList = shelfService.findAll();
-        List<ShelfDTO> result = new ArrayList<ShelfDTO>();
+        List<ShelfDTO> result = new ArrayList<>();
         for(Shelf shelf : shelfList) {
             result.add(entityToDTO(shelf));
         }
