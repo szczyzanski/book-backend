@@ -99,4 +99,7 @@ fabric.properties
 # my
 covers
 logs
+book-backend.iml
+.idea
+.gitignore
 
