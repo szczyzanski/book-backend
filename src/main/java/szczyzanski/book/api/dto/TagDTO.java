@@ -1,6 +1,7 @@
 package szczyzanski.book.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 public class TagDTO {
     private Long id;
     private String value;
+    @JsonManagedReference
     private Set<BookDTO> bookSet;
 
     TagDTO() {}

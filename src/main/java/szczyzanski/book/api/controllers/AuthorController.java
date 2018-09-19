@@ -52,8 +52,8 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/name")
-    public Set<Author> findByName() {
-        return authorService.findByForname("Jason", "Mistyczny");
+    public Author findByName() {
+        return authorService.findByName("Jason", "Mistyczny");
     }
 
     private AuthorDTO entityToDTO(final Author author) {

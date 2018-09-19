@@ -18,14 +18,17 @@ public class PublisherLineParserTest {
                             "260    Warszawa :|bSpółdzielnia Wydawnicza \"Czytelnik\",|ccopyright 2018. ",
                             "260    Kraków :|bWydawnictwo Literackie,|c2018. ",
                             "260    Kraków :|bWydawnictwo Literackie,|c2018. ",
-                            "260    Warszawa :|bOficyna Literacka Noir sur Blanc,|c2017."};
+                            "260    Warszawa :|bOficyna Literacka Noir sur Blanc,|c2017.",
+                            "260    Warszawa :|bWydawnictwo W.A.B. - Grupa Wydawnicza Foksal,\n" +
+                                    "       |c2018."};
         String[] expectedResults = {"Wydawnictwo Literackie",
                                     "Wydawnictwo W.A.B. - Grupa Wydawnicza Foksal",
                                     "Oficyna Literacka Noir sur Blanc",
                                     "Spółdzielnia Wydawnicza \"Czytelnik\"",
                                     "Wydawnictwo Literackie",
                                     "Wydawnictwo Literackie",
-                                    "Oficyna Literacka Noir sur Blanc"};
+                                    "Oficyna Literacka Noir sur Blanc",
+                                    "Wydawnictwo W.A.B. - Grupa Wydawnicza Foksal"};
         String[] actualResults = new String[lines.length];
         LineParser publisherLineParser = new PublisherLineParser();
         final int TESTS_NO = lines.length;

@@ -1,5 +1,6 @@
 package szczyzanski.book.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -9,11 +10,13 @@ import java.util.Set;
 public class BookDTO {
     private Long id;
     private long isbn;
+    @JsonBackReference
     private Set<AuthorDTO> authorSet;
     private int noOfPages;
     private String originalTitle;
     private String origin;
     private String publisher;
+    @JsonBackReference
     private Set<TagDTO> tagSet;
     private String title;
     private ShelfDTO shelf;

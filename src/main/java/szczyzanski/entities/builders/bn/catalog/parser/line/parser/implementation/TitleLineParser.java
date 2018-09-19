@@ -14,9 +14,16 @@ public class TitleLineParser implements LineParser {
         try {
             lineWithoutCode = lineWithoutCode.substring(0, lineWithoutCode.indexOf("/"));
             lineWithoutCode = lineWithoutCode.replaceAll("\\|.*\\|\\p{L}", " ");
+            lineWithoutCode = lineWithoutCode.replaceAll("\\|\\p{L}", " ");
             lineWithoutCode = lineWithoutCode.replaceAll("\\|b", "");
+            lineWithoutCode = lineWithoutCode.replaceAll(" :", ": ");
+            //IF FOR 9788308064177 (SERCE CIEMNOSCI)
+            if(lineWithoutCode.contains("=")) {
+                lineWithoutCode.substring(0, lineWithoutCode.indexOf("="));
+            }
+            //
             lineWithoutCode = lineWithoutCode.trim().replaceAll(" +", " ");
-            return lineWithoutCode.replaceAll(" :", ": ");
+            return lineWithoutCode;
         } catch (StringIndexOutOfBoundsException e) {
             final String MSG = "No title found in line: " + line;
             MalformedLineException mle = new MalformedLineException(MSG);

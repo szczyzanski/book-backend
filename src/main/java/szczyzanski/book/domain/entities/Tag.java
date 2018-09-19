@@ -22,6 +22,8 @@ public class Tag {
             inverseJoinColumns = {@JoinColumn(name = "books_id")})
     private Set<Book> bookSet = new HashSet<>();
 
+    public Tag() {}
+
     public Tag(String value, Set<Book> bookSet) {
         this.value = value;
         this.bookSet = bookSet;

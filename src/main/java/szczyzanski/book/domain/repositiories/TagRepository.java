@@ -6,5 +6,5 @@ import szczyzanski.book.domain.entities.Tag;
 import java.util.Set;
 
 public interface TagRepository extends CrudRepository<Tag, Long> {
-    Set<Tag> findByValue(final String value);
+    Tag findByValue(final String value);
 }

@@ -4,5 +4,5 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public interface URLCreator {
-    public URL createUrl(long isbn, Object... args) throws MalformedURLException;
+    public URL createUrl(Object object, Object... args) throws MalformedURLException;
 }

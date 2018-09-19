@@ -1,6 +1,5 @@
 package szczyzanski.entities.builders.bn.catalog.parser;
 
-import ch.qos.logback.core.util.StatusPrinter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +35,8 @@ public class BNCatalogRecordParser {
 //        }
 //    }
 
-    public void setIsbn(long isbn) {
+
+    public BNCatalogRecordParser(long isbn) {
         this.isbn = isbn;
     }
 
@@ -61,7 +61,7 @@ public class BNCatalogRecordParser {
 
     private void createSearchingEngineUrl() {
        try {
-           searchingEngineUrl = URLCreatorFactory.createURL(URLType.SEARCHING_ENGINGE).createUrl(isbn);
+           searchingEngineUrl = URLCreatorFactory.createURL(URLType.BN_SEARCHING_ENGINGE).createUrl(isbn);
        } catch (MalformedURLException|NoSuchUrlCreatorTypeException e) {
            logger.error(e.getMessage(), e);
        }
@@ -69,7 +69,7 @@ public class BNCatalogRecordParser {
 
     private void createRecordFileUrl() {
         try {
-            recordFileUrl = URLCreatorFactory.createURL(URLType.RECORD_FILE).createUrl(isbn, recordNo);
+            recordFileUrl = URLCreatorFactory.createURL(URLType.BN_RECORD_FILE).createUrl(isbn, recordNo);
         } catch (MalformedURLException|NoSuchUrlCreatorTypeException e) {
             logger.error(e.getMessage(), e);
         }
@@ -83,7 +83,7 @@ public class BNCatalogRecordParser {
     }
 
     private void findRecordIdNumber() throws IOException, NoRecordIdFoundException {
-        findIdNumberInFile(downloadFileContent(searchingEngineUrl));
+        findIdNumberInFile(downloadFileContentWithBreak(searchingEngineUrl));
     }
 
     private void findIdNumberInFile(String fileContent) throws NoRecordIdFoundException {
@@ -110,6 +110,19 @@ public class BNCatalogRecordParser {
             return fileContent;
         }
    }
+
+    private String downloadFileContentWithBreak(URL url) throws IOException {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+            String line, fileContent = "";
+            while((line = br.readLine()) != null) {
+                fileContent += line + System.getProperty("line.separator");
+                if(line.contains("resultRecord-")) {
+                    break;
+                }
+            }
+            return fileContent;
+        }
+    }
 
    private void runBookBuilder() throws IOException {
         BookBuilder bookBuilder = new BookBuilder();

@@ -16,11 +16,14 @@ public class OriginalTitleLineParserTest {
                             "246 1  |iTytuł oryginału:|aReservoir 13,|f2017 ",
                             "246 1  |iTytuł oryginału:|aMasumiyet Müzesi,|f2008 ",
                             "246 1  |iTytuł oryginału:|aFrom the holy mountain :|ba journey \n" +
-                                    "       among the Christians of the Middle East,|f1997 "};
+                                    "       among the Christians of the Middle East,|f1997 ",
+                            "246 1  |iTytuł oryginału:|aConversations d'un enfant du siècle,\n" +
+                                    "       |f2015"};
         String[] expectedResults = {"Moonglow",
                                     "Reservoir 13",
                                     "Masumiyet Müzesi",
-                                    "From the holy mountain: a journey among the Christians of the Middle East"};
+                                    "From the holy mountain: a journey among the Christians of the Middle East",
+                                    "Conversations d'un enfant du siècle"};
         String[] actualResults = new String[lines.length];
         LineParser originalTitleLineParser = new OriginalTitleLineParser();
         final int TESTS_NO = lines.length;

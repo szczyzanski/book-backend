@@ -20,14 +20,22 @@ public class TitleLineParserTest {
                 "245 10 Zbiornik 13 /|cJon McGregor ; przełożyła Jolanta Kozak. ",
                 "245 10 Czekoladki dla prezesa /|cSławomir Mrożek. ",
                 "245 10 Poświata /|cMichael Chabon ; przełożył Michał Kłobukowski.",
-                "245 10 Żywego ducha /|cJerzy Pilch. "};
+                "245 10 Żywego ducha /|cJerzy Pilch. ",
+                "245 10 Dawca przysięgi.|nT. 1 /|cBrandon Sanderson ; przełożyła \n" +
+                        "       Anna Studniarek ; [ilustracje Kelley Harris, Howard Lyon, \n" +
+                        "       Ben McSweeney, Miranda Meeks, Dan dos Santos i Issac \n" +
+                        "       Stewart]. ",
+                "245 10 Serce ciemności =|bHeart of darkness /|cJoseph Conrad ; \n" +
+                        "       spolszczenie 2015 Jacek Dukaj. "};
         String[] expectedResults = {"Ze świętej góry: na ścieżkach chrześcijańskiego Bizancjum",
                                     "Inni ludzie",
                                     "Muzeum niewinności",
                                     "Zbiornik 13",
                                     "Czekoladki dla prezesa",
                                     "Poświata",
-                                    "Żywego ducha"};
+                                    "Żywego ducha",
+                                    "Dawca przysięgi. T. 1",
+                                    "Serce ciemności"};
         String[] actualResults = new String[lines.length];
         LineParser titleLineParser = new TitleLineParser();
         final int TESTS_NO = lines.length;

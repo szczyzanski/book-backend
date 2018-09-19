@@ -11,8 +11,13 @@ public class OriginalTitleLineParser implements LineParser {
     public String parseLine(String line) throws MalformedLineException {
         checkArgument(line);
         try {
+            line = line.replaceAll("\\n|\\r", " ").replaceAll(" +", " ");
             line = line.substring(line.indexOf("Tytuł oryginału") + "Tytuł oryginału".length());
-            line = line.substring(0, line.indexOf(",|"));
+            if(line.indexOf(",|") >= 0) {
+                line = line.substring(0, line.indexOf(",|"));
+            } else {
+                line = line.substring(0, line.indexOf(", |"));
+            }
             line = line.replaceAll(":\\|a", "");
             line = line.replaceAll(" :\\|[a-z]", ": ");
             line = line.replaceAll("\n", " ").replaceAll("\r", "");

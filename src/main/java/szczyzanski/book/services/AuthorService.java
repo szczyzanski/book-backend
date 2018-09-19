@@ -39,7 +39,7 @@ public class AuthorService {
         return authorSet;
     }
 
-    public Set<Author> findByForname(final String forname, final String surname) {
+    public Author findByName(final String forname, final String surname) {
         return authorRepository.findByName(forname, surname);
     }
 }
