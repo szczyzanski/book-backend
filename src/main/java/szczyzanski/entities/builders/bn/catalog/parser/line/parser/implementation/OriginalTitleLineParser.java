@@ -22,6 +22,9 @@ public class OriginalTitleLineParser implements LineParser {
             line = line.replaceAll(" :\\|[a-z]", ": ");
             line = line.replaceAll("\n", " ").replaceAll("\r", "");
             line = line.trim().replaceAll(" +", " ");
+            if(line.startsWith("ryg.")) {
+                line = line.substring(line.indexOf(".ryg") + ".ryg".length() + 1);
+            }
             return  line;
         } catch (IndexOutOfBoundsException e) {
             final String MSG = "No original title found in line: " + line;

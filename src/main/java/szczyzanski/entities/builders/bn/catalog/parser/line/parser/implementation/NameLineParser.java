@@ -30,7 +30,9 @@ public class NameLineParser implements LineParser {
         //firstname
         try {
             line = line.substring(line.indexOf(surname) + surname.length());
-            line = line.substring(0, line.indexOf("|"));
+            if(line.contains("|")) {
+                line = line.substring(0, line.indexOf("|"));
+            }
             String firstname = extractFirstName(line);
             //result
             return firstname + surname.substring(0, surname.length()-1);

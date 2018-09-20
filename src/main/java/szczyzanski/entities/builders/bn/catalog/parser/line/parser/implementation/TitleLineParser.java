@@ -19,7 +19,7 @@ public class TitleLineParser implements LineParser {
             lineWithoutCode = lineWithoutCode.replaceAll(" :", ": ");
             //IF FOR 9788308064177 (SERCE CIEMNOSCI)
             if(lineWithoutCode.contains("=")) {
-                lineWithoutCode.substring(0, lineWithoutCode.indexOf("="));
+                lineWithoutCode = lineWithoutCode.substring(0, lineWithoutCode.indexOf("="));
             }
             //
             lineWithoutCode = lineWithoutCode.trim().replaceAll(" +", " ");

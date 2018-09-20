@@ -38,6 +38,12 @@ public class LCCoverDownloader {
         if(title.contains(".")) {
             title = title.substring(0, title.indexOf("."));
         }
+        if(title.contains(";")) {
+            title = title.substring(0, title.indexOf(";"));
+        }
+        if(title.endsWith("?")) {
+            title = title.substring(0, title.length() - 1);
+        }
         return title;
     }
 
@@ -60,7 +66,7 @@ public class LCCoverDownloader {
 
     private void getCoverUrl() throws IOException {
         String file = downloadFileContent(searcherUrl);
-
+        //todo empty json?
         if(file.startsWith("{")) {
             JsonObject jsonObject = Json.createReader(new StringReader(file)).readObject();
             for(String key : jsonObject.keySet()) {

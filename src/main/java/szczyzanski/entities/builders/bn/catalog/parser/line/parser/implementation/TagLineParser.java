@@ -18,6 +18,9 @@ public class TagLineParser implements LineParser {
         if(matcher.find()) {
             String tagStart = matcher.group();
             try {
+                if(line.contains("|")) {
+                    line = line.substring(0, line.indexOf("|"));
+                }
                 return line.substring(line.indexOf(tagStart)).trim().replaceAll(" +", " ");
             } catch (IndexOutOfBoundsException e) {
                 final String MSG = "No tag found in line: " + line;

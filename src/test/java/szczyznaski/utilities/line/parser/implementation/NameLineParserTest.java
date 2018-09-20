@@ -23,7 +23,8 @@ public class NameLineParserTest {
                             "700 1  Kozak, Jolanta|d(1951- ).|eTłumaczenie",
                             "700 1  Sulimowicz, Anna Akbike.|eTłumaczenie ",
                             "700 1  Chorąży, Maciej.|eIlustracje",
-                            "700 1  Obłucki, Krzysztof.|eTłumaczenie"};
+                            "700 1  Obłucki, Krzysztof.|eTłumaczenie",
+                            "100 1  Podlewski, Marcin "};
         String[] expectedResults = {"William Dalrymple",
                                     "Dorota Masłowska",
                                     "Orhan Pamuk",
@@ -35,7 +36,8 @@ public class NameLineParserTest {
                                     "Jolanta Kozak",
                                     "Anna Akbike Sulimowicz",
                                     "Maciej Chorąży",
-                                    "Krzysztof Obłucki"};
+                                    "Krzysztof Obłucki",
+                                    "Marcin Podlewski"};
         String[] actualResults = new String[lines.length];
         LineParser nameLineParser = new NameLineParser();
         final int TESTS_NO = lines.length;

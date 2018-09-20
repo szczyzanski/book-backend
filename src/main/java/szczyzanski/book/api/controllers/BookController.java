@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.java2d.cmm.Profile;
 import szczyzanski.book.api.dto.BookDTO;
 import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.services.AuthorService;
 import szczyzanski.book.services.BookService;
 import szczyzanski.book.services.ShelfService;
 import szczyzanski.exceptions.BNRecordParsingException;
+import szczyzanski.external.services.SuggestedTagGenerator;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,16 @@ public class BookController {
     }
 
     @RequestMapping(value = "/isbn/{isbn}")
-    public BookDTO findByIsbn(@PathVariable long isbn) throws BNRecordParsingException {
+    public BookDTO findByIsbn(@PathVariable long isbn) throws BNRecordParsingException, FileNotFoundException {
         Book book = bookService.findOnBnCatalogByIsbn(isbn);
+        int repoSize = bookService.findAll().size();
+        SuggestedTagGenerator stg = new SuggestedTagGenerator(book, repoSize);
+        Profiler profiler = new Profiler("tag generator");
+        profiler.start("tag print");
+        stg.printSuggestedTags();
+        System.out.println("***********************************************************************************");
+        profiler.stop().print();
+        System.out.println("***********************************************************************************");
         return entityToDTO(book);
     }
 
@@ -111,12 +122,162 @@ public class BookController {
                 9788365781109L,
                 9788380495654L,
                 9788306033991L,
+                9788380495517L,
+                9788380495647L,
+                9788328044340L,
+                9788365613257L,
+                9788380622203L,
+                9788365780607L,
+                9788380621497L,
+                9788365613516L,
+                9788380620506L,
+                9788328045965L,
+                9788380495579L,
+                9788308063590L,
+                9788308063613L,
+                9788380495395L,
+                9788324049851L,
+                9788308063712L,
+                9788378187127L,
+                9788328044791L,
+                9788364384684L,
+                9788374808279L,
+                9788306033946L,
+                9788374808286L,
+                9788308048900L,
+                9788380495005L,
+                9788365676924L,
+                9788328044357L,
+                9788365534491L,
+                9788328703995L,
+                9788380321694L,
+                9788374807296L,
+                9788380494947L,
+                9788380621985L,
+                9788365613233L,
+                9788380970809L,
+                9788365781017L,
+                9788308063514L,
+                9788308062388L,
+                9788364648526L,
+                9788374806596L,
+                9788307034126L,
+                9788365613073L,
+                9788328036963L,
+                9788380621626L,
+                9788380321717L,
+                9788364384646L,
+                9788380970847L,
+                9788326824791L,
+                9788377186046L,
+                9788365271402L,
+                9788377186053L,
+                9788380494619L,
+                9788307033853L,
+                9788364887505L,
+                9788380493759L,
+                9788380493759L,
+                9788379431090L,
+                9788380493575L,
+                9788377186039L,
+                9788379247752L,
+                9788324227440L,
+                9788364384592L,
+                9788379858897L,
+                9788380620490L,
+                9788326823961L,
+                9788380316294L,
+                9788373926127L,
+                9788380493520L,
+                9788380970335L,
+                9788380620964L,
+                9788380494282L,
+                9788380621282L,
+                9788380494305L,
+                9788364887307L,
+                9788328026018L,
+                9788380970243L,
+                9788365676115L,
+                9788364887406L,
+                9788364822643L,
+                9788380321304L,
+                9788324230334L,
+                9788379246984L,
+                9788328026438L,
+                9788377312469L,
+                9788328027411L,
+                9788364822636L,
+                9788380321243L,
+                9788308061930L,
+                9788364384585L,
+                9788324230563L,
+                9788308062241L,
+                9788328021518L,
+                9788380620452L,
+                9788379950690L,
+                9788328703964L,
+                9788378931133L,
+                9788379247011L,
+                9788380694767L,
+                9788328026179L,
+                9788378931577L,
+                9788370541651L,
+                9788308062210L,
+                9788377589328L,
+                9788328021938L,
+                9788324026524L,
+                9788364822506L,
+                9788377186022L,
+                9788380310827L,
+                9788364384530L,
+                9788380693920L,
+                9788379246366L,
+                9788380693487L,
+                9788380493179L,
+                9788380620100L,
+                9788377186015L,
+                9788377792926L,
+                9788364030734L,
+                9788365271129L,
+                9788375082678L,
+                9788364030857L,
+                9788374806527L,
+                9788378188780L,
+                9788328020986L,
+                9788374806497L,
+                9788374806497L,
+                9788379990399L,
+                9788379246861L,
+                9788380490246L,
+                9788374806411L,
+                9788306031546L,
+                9788374806381L,
+                9788376422268L,
+                9788365315366L,
+                9788379641703L,
+                9788379245185L,
+                9788374806343L,
+                9788306031157L,
+                9788365282330L,
+                9788374806442L,
+                9788374806398L,
+                9788364822469L,
+                9788365157003L,
+                9788364297694L,
+                9788374806312L,
+                9788380492196L,
+                9788378187431L,
+                9788380492561L,
+                9788364648199L
         };
         Profiler profiler = new Profiler("basic");
         profiler.start("work");
         for(long isbn : testArgumentList) {
             bookService.findOnBnCatalogByIsbn(isbn);
         }
+        /*for(int i = 0; i < 75; i++) {
+            bookService.findOnBnCatalogByIsbn(testArgumentList[i]);
+        }*/
         System.out.println("***********************************************************************************");
         profiler.stop().print();
         System.out.println("***********************************************************************************");

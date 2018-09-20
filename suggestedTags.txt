@@ -1,0 +1,238 @@
+Rozmiar mapy tagow: 237
+Tag{id=88, value='Science fiction'}: 12
+Tag{id=92, value='Istoty pozaziemskie'}: 8
+Tag{id=56, value='Fantasy'}: 7
+Tag{id=226, value='Fantastyka'}: 6
+Tag{id=103, value='Tożsamość osobista'}: 5
+Tag{id=30, value='Miłość'}: 5
+Tag{id=27, value='Pamięć autobiograficzna'}: 5
+Tag{id=122, value='Polska'}: 5
+Tag{id=97, value='Kobieta'}: 5
+Tag{id=87, value='Rzeczywistość alternatywna'}: 4
+Tag{id=31, value='Stany Zjednoczone (USA)'}: 4
+Tag{id=94, value='ZSRR'}: 4
+Tag{id=312, value='Dystopia'}: 4
+Tag{id=91, value='Ziemia'}: 3
+Tag{id=14, value='Warszawa (woj. mazowieckie)'}: 3
+Tag{id=169, value='Zabójstwo'}: 3
+Tag{id=42, value='Dziewczęta'}: 3
+Tag{id=134, value='Amerykanie'}: 2
+Tag{id=133, value='Emigracja'}: 2
+Tag{id=127, value='Dzieciństwo'}: 2
+Tag{id=148, value='Tajemnica'}: 2
+Tag{id=54, value='Magia'}: 2
+Tag{id=111, value='Dzieci'}: 2
+Tag{id=26, value='Loty kosmiczne'}: 2
+Tag{id=429, value='Komunizm'}: 2
+Tag{id=38, value='Obyczaje i zwyczaje'}: 2
+Tag{id=34, value='Ludzie bogaci'}: 2
+Tag{id=328, value='Organizmy transgeniczne'}: 2
+Tag{id=351, value='Horror'}: 2
+Tag{id=206, value='Kanada'}: 2
+Tag{id=28, value='II wojna światowa (1939-1945)'}: 2
+Tag{id=29, value='Sekrety rodzinne'}: 2
+Tag{id=112, value='Imigranci'}: 2
+Tag{id=12, value='Relacje międzyludzkie'}: 2
+Tag{id=55, value='Krew'}: 2
+Tag{id=231, value='Przemoc wobec kobiet'}: 2
+Tag{id=220, value='Kryminał'}: 2
+Tag{id=149, value='Prześladowania polityczne'}: 2
+Tag{id=93, value='Telepatia'}: 2
+Tag{id=124, value='Stalinizm'}: 2
+Tag{id=242, value='Wojna'}: 2
+Tag{id=135, value='Matki i synowie'}: 2
+Tag{id=224, value='Przyjaźń'}: 2
+Tag{id=130, value='Rodzina'}: 2
+Tag{id=189, value='Podróże'}: 2
+Tag{id=336, value='Paryż (Francja)'}: 2
+Tag{id=57, value='Smoki (stworzenia fantastyczne)'}: 2
+Tag{id=339, value='Władza'}: 1
+Tag{id=230, value='Migracje'}: 1
+Tag{id=384, value='Oniryzm'}: 1
+Tag{id=433, value='Sieroty wojennne'}: 1
+Tag{id=123, value='Węgry'}: 1
+Tag{id=310, value='Ludobójstwo w Rwandzie (1994)'}: 1
+Tag{id=100, value='Węgrzy'}: 1
+Tag{id=390, value='Gry komputerowe'}: 1
+Tag{id=37, value='Kolekcjonerzy'}: 1
+Tag{id=432, value='Litwa'}: 1
+Tag{id=170, value='Tygrys'}: 1
+Tag{id=285, value='Monopole'}: 1
+Tag{id=208, value='Kara dożywotniego pozbawienia wolności'}: 1
+Tag{id=337, value='Katastrofy'}: 1
+Tag{id=298, value='Laboratoria'}: 1
+Tag{id=274, value='Przestrzeń kosmiczna'}: 1
+Tag{id=428, value='Mińsk (Białoruś)'}: 1
+Tag{id=151, value='Saga rodzinna'}: 1
+Tag{id=194, value='Stany Zjednoczone (część zachodnia)'}: 1
+Tag{id=359, value='Katastrofy lotnicze'}: 1
+Tag{id=286, value='Rzeczywistość wirtualna'}: 1
+Tag{id=449, value='Piechota zmechanizowana'}: 1
+Tag{id=352, value='Puby'}: 1
+Tag{id=241, value='Historia alternatywna'}: 1
+Tag{id=379, value='Kontrterroryzm'}: 1
+Tag{id=344, value='Lekarze'}: 1
+Tag{id=376, value='Wojna 2003-2010 r. amerykańsko-iracka'}: 1
+Tag{id=162, value='Polityka'}: 1
+Tag{id=441, value='Księżyc'}: 1
+Tag{id=358, value='Ocean Spokojny'}: 1
+Tag{id=35, value='Stambuł (Turcja)'}: 1
+Tag{id=205, value='Procesy sądowe'}: 1
+Tag{id=334, value='Bohema'}: 1
+Tag{id=254, value='Media społecznościowe'}: 1
+Tag{id=442, value='Demony'}: 1
+Tag{id=309, value='Burundi'}: 1
+Tag{id=199, value='Kolonializm'}: 1
+Tag{id=443, value='Lublin (woj. lubelskie)'}: 1
+Tag{id=17, value='Życie codzienne'}: 1
+Tag{id=297, value='Mars (planeta)'}: 1
+Tag{id=401, value='Inżynieria genetyczna'}: 1
+Tag{id=239, value='Rozstanie'}: 1
+Tag{id=283, value='Wirusy komputerowe'}: 1
+Tag{id=75, value='Hiszpania'}: 1
+Tag{id=266, value='Seksualność'}: 1
+Tag{id=305, value='Erotyzm'}: 1
+Tag{id=118, value='Złoty Pawilon (Kioto)'}: 1
+Tag{id=237, value='Meksyk'}: 1
+Tag{id=289, value='Hibernacja'}: 1
+Tag{id=221, value='Nastolatki'}: 1
+Tag{id=375, value='Futbol amerykański'}: 1
+Tag{id=440, value='Rabini'}: 1
+Tag{id=203, value='Wielojęzyczność'}: 1
+Tag{id=243, value='Maszyny'}: 1
+Tag{id=153, value='Rewolucja kulturalna w Chinach'}: 1
+Tag{id=413, value='Praga (Czechy)'}: 1
+Tag{id=102, value='Podróż poślubna'}: 1
+Tag{id=73, value='Małżeństwo'}: 1
+Tag{id=263, value='Lęk'}: 1
+Tag{id=129, value='Awans społeczny'}: 1
+Tag{id=95, value='Kolektywizacja rolnictwa'}: 1
+Tag{id=311, value='Wojna domowa w Rwandzie (1990-1994)'}: 1
+Tag{id=386, value='Terroryści'}: 1
+Tag{id=89, value='Inwazja kosmitów'}: 1
+Tag{id=244, value='Nowy Jork (Stany Zjednoczone)'}: 1
+Tag{id=405, value='Planety'}: 1
+Tag{id=284, value='Prywatni detektywi'}: 1
+Tag{id=315, value='Rzeczywistość postapokaliptyczna'}: 1
+Tag{id=99, value='Syberia (Rosja)'}: 1
+Tag{id=96, value='Tatarzy'}: 1
+Tag{id=314, value='Język francuski'}: 1
+Tag{id=431, value='Indianie'}: 1
+Tag{id=232, value='Marzenia'}: 1
+Tag{id=23, value='Modelarstwo'}: 1
+Tag{id=146, value='Malarze'}: 1
+Tag{id=200, value='Afryka'}: 1
+Tag{id=235, value='Przestępczość zorganizowana'}: 1
+Tag{id=90, value='Okupacja'}: 1
+Tag{id=276, value='Człowiek'}: 1
+Tag{id=185, value='Bukareszt (Rumunia)'}: 1
+Tag{id=333, value='Wdowieństwo'}: 1
+Tag{id=192, value='Western'}: 1
+Tag{id=136, value='Rosja'}: 1
+Tag{id=253, value='Żołnierze'}: 1
+Tag{id=292, value='Kolonizacja kosmosu'}: 1
+Tag{id=383, value='Śpiączka'}: 1
+Tag{id=388, value='Samozapłon'}: 1
+Tag{id=343, value='Szpitale psychiatryczne'}: 1
+Tag{id=187, value='Trauma'}: 1
+Tag{id=74, value='Nowa Anglia (Stany Zjednoczone)'}: 1
+Tag{id=229, value='Katastrofy morskie'}: 1
+Tag{id=356, value='Rozbitkowie'}: 1
+Tag{id=362, value='Teokracja'}: 1
+Tag{id=308, value='I wojna światowa (1914-1918)'}: 1
+Tag{id=109, value='Rodzina zastępcza'}: 1
+Tag{id=444, value='Diabeł'}: 1
+Tag{id=430, value='Ameryka Północna'}: 1
+Tag{id=389, value='Samobójstwo'}: 1
+Tag{id=291, value='System obronny państwa'}: 1
+Tag{id=190, value='Europa'}: 1
+Tag{id=338, value='Sekty i ruchy religijne'}: 1
+Tag{id=240, value='Świadomość'}: 1
+Tag{id=147, value='Zamki i pałace'}: 1
+Tag{id=98, value='Wysiedlanie'}: 1
+Tag{id=382, value='Poeci bośniaccy'}: 1
+Tag{id=255, value='Prawo do prywatności'}: 1
+Tag{id=150, value='Chiny'}: 1
+Tag{id=434, value='Niemcy'}: 1
+Tag{id=329, value='Kasty'}: 1
+Tag{id=326, value='Artyści cyrkowi'}: 1
+Tag{id=381, value='Kraje dawnej Jugosławii'}: 1
+Tag{id=132, value='Robotnicy'}: 1
+Tag{id=350, value='Wielka Brytania'}: 1
+Tag{id=234, value='Hiszpanie'}: 1
+Tag{id=193, value='Kowboje'}: 1
+Tag{id=307, value='Jeńcy wojenni'}: 1
+Tag{id=84, value='Uchodźcy'}: 1
+Tag{id=377, value='Irak'}: 1
+Tag{id=36, value='Klasy społeczne'}: 1
+Tag{id=300, value='Ubóstwo'}: 1
+Tag{id=288, value='Azja Środkowa'}: 1
+Tag{id=86, value='Żydzi'}: 1
+Tag{id=378, value='Kombatanci'}: 1
+Tag{id=361, value='Fanatyzm'}: 1
+Tag{id=131, value='Kentucky (Stany Zjednoczone ; stan)'}: 1
+Tag{id=427, value='Argentyna'}: 1
+Tag{id=313, value='Wynalazcy i odkrywcy'}: 1
+Tag{id=374, value='Teksas (Stany Zjednoczone ; stan)'}: 1
+Tag{id=363, value='Mizoginia'}: 1
+Tag{id=275, value='Konflikt'}: 1
+Tag{id=236, value='Żałoba'}: 1
+Tag{id=125, value='Berlin (Niemcy)'}: 1
+Tag{id=290, value='Walka informacyjna'}: 1
+Tag{id=302, value='Marginalizacja społeczna'}: 1
+Tag{id=116, value='Buddyzm'}: 1
+Tag{id=154, value='Wydarzenia 1989 r. w Pekinie'}: 1
+Tag{id=445, value='Rewolucja'}: 1
+Tag{id=364, value='Seksizm'}: 1
+Tag{id=404, value='Osadnictwo'}: 1
+Tag{id=245, value='Życie seksualne'}: 1
+Tag{id=128, value='Ruchliwość społeczna'}: 1
+Tag{id=33, value='Chorzy w stanach terminalnych'}: 1
+Tag{id=219, value='Tożsamość płciowa'}: 1
+Tag{id=439, value='Umysł'}: 1
+Tag{id=160, value='Śmierć'}: 1
+Tag{id=168, value='Indonezja'}: 1
+Tag{id=387, value='Opowiadania i nowele psychologiczne'}: 1
+Tag{id=113, value='Piękno'}: 1
+Tag{id=204, value='Samotność'}: 1
+Tag{id=277, value='Zakochanie'}: 1
+Tag{id=448, value='Ogry'}: 1
+Tag{id=385, value='Hawana (Kuba)'}: 1
+Tag{id=171, value='Podróże międzyplanetarne'}: 1
+Tag{id=126, value='Powstanie węgierskie (1956)'}: 1
+Tag{id=357, value='Bezludna wyspa'}: 1
+Tag{id=41, value='Anglia (Wielka Brytania)'}: 1
+Tag{id=342, value='Eugenika'}: 1
+Tag{id=332, value='Wywiad izraelski'}: 1
+Tag{id=262, value='Koniec świata'}: 1
+Tag{id=201, value='Rycerze'}: 1
+Tag{id=101, value='Włochy'}: 1
+Tag{id=114, value='Akolici'}: 1
+Tag{id=402, value='Nowy Jork (Stany Zjednoczone ; stan)'}: 1
+Tag{id=325, value='Cyrk'}: 1
+Tag{id=207, value='Pomoc domowa'}: 1
+Tag{id=110, value='Szkoły tańca'}: 1
+Tag{id=115, value='Kioto (Japonia)'}: 1
+Tag{id=44, value='Społeczności lokalne'}: 1
+Tag{id=179, value='Życie kulturalne'}: 1
+Tag{id=67, value='Etyka'}: 1
+Tag{id=472, value='Choroby płuc'}: 1
+Tag{id=180, value='Kompozytorzy rosyjscy'}: 1
+Tag{id=155, value='Muzycy chińscy'}: 1
+Tag{id=447, value='Obrona terytorium kraju'}: 1
+Tag{id=335, value='Wolność seksualna'}: 1
+Tag{id=152, value='Vancouver (Kanada)'}: 1
+Tag{id=117, value='Podpalenie'}: 1
+Tag{id=195, value='Dziki Zachód'}: 1
+Tag{id=104, value='Mieszczaństwo'}: 1
+Tag{id=202, value='Burza'}: 1
+Tag{id=301, value='Relacje międzypokoleniowe'}: 1
+Tag{id=360, value='Fundamentalizm'}: 1
+Tag{id=25, value='Dziadkowie i wnuki'}: 1
+Tag{id=196, value='Zawody sportowe'}: 1
+Tag{id=267, value='Pisarze'}: 1
+Tag{id=238, value='Poczucie straty'}: 1
+Tag{id=299, value='Osoby w wieku starszym'}: 1
+Tag{id=233, value='Handel kobietami'}: 1
+Tag{id=191, value='Bydło'}: 1
+Tag{id=178, value='Petersburg (Rosja)'}: 1
