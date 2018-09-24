@@ -3,6 +3,7 @@ package szczyzanski.book.api.controllers;
 import org.modelmapper.ModelMapper;
 import org.slf4j.profiler.Profiler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,7 @@ public class BookController {
     private ModelMapper modelMapper;
 
     @RequestMapping(value = "/all")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<BookDTO> findAll() {
         List<Book> bookList = bookService.findAll();
         List<BookDTO> result = new ArrayList<>();
@@ -54,6 +56,12 @@ public class BookController {
         profiler.stop().print();
         System.out.println("***********************************************************************************");
         return entityToDTO(book);
+    }
+
+    @RequestMapping(value = "/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public BookDTO findById(@PathVariable long id) {
+        return entityToDTO(bookService.findById(id));
     }
 
     @RequestMapping(value = "/test")
@@ -275,7 +283,7 @@ public class BookController {
         for(long isbn : testArgumentList) {
             bookService.findOnBnCatalogByIsbn(isbn);
         }
-        /*for(int i = 0; i < 75; i++) {
+        /*for(int i = 0; i < 5; i++) {
             bookService.findOnBnCatalogByIsbn(testArgumentList[i]);
         }*/
         System.out.println("***********************************************************************************");

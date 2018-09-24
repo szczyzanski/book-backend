@@ -24,4 +24,12 @@ public class TagService {
     public Tag add(Tag tag) {
         return tagRepository.save(tag);
     }
+
+    public Tag findById(final long id) {
+        return tagRepository.findById(id).orElseThrow(NullPointerException::new);
+    }
+
+    public Set<Tag> findByBookId(final long id) {
+        return tagRepository.findByBookId(id);
+    }
 }

@@ -13,6 +13,7 @@ import szczyzanski.external.services.LCCoverDownloader;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -26,6 +27,10 @@ public class BookService{
 
     public List<Book> findAll() {
         return (List) bookRepository.findAll();
+    }
+
+    public Book findById(long id) {
+        return bookRepository.findById(id).orElseThrow(NullPointerException::new);
     }
 
     public Book findOnBnCatalogByIsbn(long isbn) throws BNRecordParsingException {

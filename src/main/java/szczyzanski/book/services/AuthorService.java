@@ -24,6 +24,7 @@ public class AuthorService {
         authorRepository.save(new Author("Jason", "Mistyczny", null));
     }
 
+    //todo CHANGE TO GETBYID AND HANDLE LIKE BOOK
     public Author getOne(final Long id) {
         return authorRepository.findById(id).get();
     }
@@ -41,5 +42,9 @@ public class AuthorService {
 
     public Author findByName(final String forname, final String surname) {
         return authorRepository.findByName(forname, surname);
+    }
+
+    public Set<Author> findByBookId(final long id) {
+        return authorRepository.findByBookId(id);
     }
 }
