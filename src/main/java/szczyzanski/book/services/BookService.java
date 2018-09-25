@@ -1,7 +1,9 @@
 package szczyzanski.book.services;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.nio.ch.IOUtil;
 import szczyzanski.book.domain.entities.Author;
 import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.domain.entities.Shelf;
@@ -11,6 +13,9 @@ import szczyzanski.entities.builders.bn.catalog.parser.BNCatalogRecordParser;
 import szczyzanski.exceptions.BNRecordParsingException;
 import szczyzanski.external.services.LCCoverDownloader;
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +48,20 @@ public class BookService{
         lcCoverDownloader.downloadCover();
         return book;
     }
+    //TODO
+    public int getNoOfCovers(long id) {
+        String pathname = "covers/" + id + "/";
+        return new File(pathname).list().length;
+    }
 
+    public byte[] getCover(long id, int no) throws IOException {
+        String pathname = "covers/" + id + "/" + no + ".jpg";
+        File imageFile = new File(pathname);
+        InputStream in = new FileInputStream(imageFile);
+        //in.close();
+        return IOUtils.toByteArray(in);
+    }
+    //TODO
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }

@@ -1,13 +1,11 @@
 package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.slf4j.profiler.Profiler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import sun.java2d.cmm.Profile;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import szczyzanski.book.api.dto.BookDTO;
 import szczyzanski.book.domain.entities.Book;
 import szczyzanski.book.services.AuthorService;
@@ -62,6 +60,28 @@ public class BookController {
     @CrossOrigin(origins = "http://localhost:4200")
     public BookDTO findById(@PathVariable long id) {
         return entityToDTO(bookService.findById(id));
+    }
+
+    @RequestMapping(value = "/cover/n/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public int getNoOfCovers(@PathVariable long id) {
+        return bookService.getNoOfCovers(id);
+    }
+
+    @GetMapping(
+            value = "/cover/{id}&{no}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    @CrossOrigin(origins = "http://localhost:4200")
+    public byte[] getCover(@PathVariable final long id, @PathVariable final int no) throws IOException {
+        return bookService.getCover(id, no);
+    }
+
+    private BookDTO entityToDTO(final Book book) {
+        if(book == null) {
+            return null;
+        }
+        return modelMapper.map(book, BookDTO.class);
     }
 
     @RequestMapping(value = "/test")
@@ -283,18 +303,11 @@ public class BookController {
         for(long isbn : testArgumentList) {
             bookService.findOnBnCatalogByIsbn(isbn);
         }
-        /*for(int i = 0; i < 5; i++) {
+        /*for(int i = 0; i < 10; i++) {
             bookService.findOnBnCatalogByIsbn(testArgumentList[i]);
         }*/
         System.out.println("***********************************************************************************");
         profiler.stop().print();
         System.out.println("***********************************************************************************");
-    }
-
-    private BookDTO entityToDTO(final Book book) {
-        if(book == null) {
-            return null;
-        }
-        return modelMapper.map(book, BookDTO.class);
     }
 }
