@@ -49,6 +49,13 @@ public class Tag {
         this.bookSet = bookSet;
     }
 
+    public void addBook(Book book) {
+        if(bookSet == null) {
+            bookSet = new HashSet<>();
+        }
+        bookSet.add(book);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

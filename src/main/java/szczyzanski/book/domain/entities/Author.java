@@ -80,8 +80,10 @@ public class Author {
     }
 
     public void addBook(Book book) {
+        if(bookSet == null) {
+            bookSet = new HashSet<>();
+        }
         bookSet.add(book);
-        book.getAuthorSet().add(this);
     }
 
     public void removeBook(Book book) {

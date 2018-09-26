@@ -1,6 +1,7 @@
 package szczyzanski.book.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import szczyzanski.book.domain.entities.Tag;
 import szczyzanski.book.domain.repositiories.TagRepository;
@@ -21,8 +22,14 @@ public class TagService {
         return tagRepository.findByValue(value);
     }
 
-    public Tag add(Tag tag) {
+    public Tag save(Tag tag) {
         return tagRepository.save(tag);
+    }
+
+    public void save(Set<Tag> tags) {
+        for(Tag tag : tags) {
+            tagRepository.save(tag);
+        }
     }
 
     public Tag findById(final long id) {

@@ -3,7 +3,7 @@ package szczyzanski.entities.builders.bn.catalog.parser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import szczyzanski.book.domain.entities.Book;
+import szczyzanski.book.api.dto.full.book.BookWithFullInfoDTO;
 import szczyzanski.entities.builders.bn.catalog.parser.utilities.url.creator.URLCreatorFactory;
 import szczyzanski.entities.builders.bn.catalog.parser.utilities.url.creator.URLType;
 import szczyzanski.exceptions.BNRecordParsingException;
@@ -23,7 +23,7 @@ public class BNCatalogRecordParser {
     private URL recordFileUrl;
     private long isbn;
     private String recordNo;
-    private Book book;
+    private BookWithFullInfoDTO bookWithFullInfoDTO;
 
 //    public static void main(String[] args) {
 //        BNCatalogRecordParser recordParser = new BNCatalogRecordParser();
@@ -40,7 +40,7 @@ public class BNCatalogRecordParser {
         this.isbn = isbn;
     }
 
-    public Book findRecordByIsbn() throws BNRecordParsingException {
+    public BookWithFullInfoDTO findRecordByIsbn() throws BNRecordParsingException {
         try {
             createSearchingEngineUrl();
             isUrlSet(searchingEngineUrl);
@@ -48,7 +48,7 @@ public class BNCatalogRecordParser {
             createRecordFileUrl();
             isUrlSet(recordFileUrl);
             runBookBuilder();
-            return book;
+            return bookWithFullInfoDTO;
         } catch (IOException|NoRecordIdFoundException e) {
             final String MSG = "Cannot parse record!" + System.getProperty("line.separator")
                     + "Number: " + isbn + System.getProperty("line.separator")
@@ -126,6 +126,6 @@ public class BNCatalogRecordParser {
 
    private void runBookBuilder() throws IOException {
         BookBuilder bookBuilder = new BookBuilder();
-        book = bookBuilder.createBookFromFile(downloadFileContent(recordFileUrl));
+        bookWithFullInfoDTO = bookBuilder.createBookFromFile(downloadFileContent(recordFileUrl));
    }
 }

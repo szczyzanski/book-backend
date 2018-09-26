@@ -1,11 +1,12 @@
 package szczyzanski.external.services;
 
-import szczyzanski.book.domain.entities.Book;
+import szczyzanski.book.api.dto.full.book.BookWithFullInfoDTO;
 
 import javax.imageio.ImageIO;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 import java.awt.*;
 import java.awt.image.RenderedImage;
 import java.io.*;
@@ -21,11 +22,9 @@ public class LCCoverDownloader {
     private URL searcherUrl;
     private List<Image> images = new ArrayList<>();
     private List<URL> coverUrls = new ArrayList<>();
-    private Long id;
 
-    public LCCoverDownloader(Book book) {
-        this.title = titleForm(book.getTitle());
-        this.id = book.getId();
+    public LCCoverDownloader(BookWithFullInfoDTO bookWithFullInfoDTO) {
+        this.title = titleForm(bookWithFullInfoDTO.getTitle());
     }
 
     private String titleForm(String title) {
@@ -67,9 +66,11 @@ public class LCCoverDownloader {
     private void getCoverUrl() throws IOException {
         String file = downloadFileContent(searcherUrl);
         //todo empty json?
+        //todo refactor - instanceof on JsonValue instead of startWith???
         if(file.startsWith("{")) {
             JsonObject jsonObject = Json.createReader(new StringReader(file)).readObject();
             for(String key : jsonObject.keySet()) {
+                System.out.println("WESZLO DO FORA " + key);
                 try {
                     String cover = jsonObject.getJsonObject(key).getString("cover").replace("50x75", "352x500");
                     try {
@@ -82,12 +83,20 @@ public class LCCoverDownloader {
                 }
             }
         } else if (file.startsWith("[")){
+            System.out.println("NIE WESZLO DO FORA");
             JsonArray jsonArray = Json.createReader(new StringReader(file)).readArray();
-            try {
-                String cover = jsonArray.getJsonObject(0).getString("cover").replace("50x75", "352x500");
-                coverUrls.add(new URL(cover));
-            } catch (NullPointerException npe) {
-                System.out.println("rekord bez okladki");
+            for(JsonValue jsonValue : jsonArray) {
+                if(jsonValue instanceof JsonObject) {
+                    try {
+                        JsonObject jsonObject = (JsonObject) jsonValue;
+                        String cover =  jsonObject
+                                        .getString("cover")
+                                        .replace("50x75", "352x500");
+                        coverUrls.add(new URL(cover));
+                    } catch (NullPointerException npe) {
+                        System.out.println("rekord bez okladki");
+                    }
+                }
             }
         }
     }
@@ -100,7 +109,7 @@ public class LCCoverDownloader {
 
     private void saveCover() throws IOException {
         for(int i = 0; i < images.size(); i++) {
-            File outputFile = new File("covers/" + id + "/" + i + ".jpg");
+            File outputFile = new File("covers/" + 0 + "/" + i + ".jpg");
             outputFile.mkdirs();
             ImageIO.write((RenderedImage) images.get(i), "jpg", outputFile);
         }

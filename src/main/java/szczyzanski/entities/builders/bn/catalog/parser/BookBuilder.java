@@ -2,7 +2,7 @@ package szczyzanski.entities.builders.bn.catalog.parser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import szczyzanski.book.domain.entities.Book;
+import szczyzanski.book.api.dto.full.book.BookWithFullInfoDTO;
 import szczyzanski.exceptions.MalformedLineException;
 import szczyzanski.entities.builders.bn.catalog.parser.utilities.ProperLineFormer;
 import szczyzanski.entities.builders.bn.catalog.parser.utilities.PropertyController;
@@ -12,18 +12,18 @@ import java.util.List;
 
 public class BookBuilder {
     final private static Logger logger = LoggerFactory.getLogger(BookBuilder.class);
-    public Book createBookFromFile(String fileContent) {
+    public BookWithFullInfoDTO createBookFromFile(String fileContent) {
         List<String> list = ProperLineFormer.formProperLines(fileContent);
-        Book book = new Book();
+        BookWithFullInfoDTO bookWithFullInfoDTO = new BookWithFullInfoDTO();
         for(String line : list) {
             try {
                 PropertyController propertyController = PropertyControllerFactory.chooseProperty(getCode(line));
-                propertyController.changeProperty(book, line);
+                propertyController.changeProperty(bookWithFullInfoDTO, line);
             } catch (MalformedLineException e) {
                 logger.error("Not proper line: " + line, e);
             }
         }
-        return book;
+        return bookWithFullInfoDTO;
     }
 
     private String getCode(String line) {

@@ -29,8 +29,14 @@ public class AuthorService {
         return authorRepository.findById(id).get();
     }
 
-    public Author add(Author author) {
+    public Author save(Author author) {
         return authorRepository.save(author);
+    }
+
+    public void save(Set<Author> authors) {
+        for(Author author : authors) {
+            authorRepository.save(author);
+        }
     }
 
     public Set<Author> getDefaultSet() {

@@ -49,11 +49,11 @@ public class AuthorController {
         return entityToDTO(authorService.getOne(id));
     }
 
-    //TODO add exceptions
-    @RequestMapping(value = "/add")
-    public AuthorDTO add(final AuthorDTO authorDTO) {
-        return entityToDTO(authorService.add(DTOToEntity(authorDTO)));
-    }
+//    //TODO add exceptions
+//    @RequestMapping(value = "/add")
+//    public AuthorDTO add(final AuthorDTO authorDTO) {
+//        return entityToDTO(authorService.add(DTOToEntity(authorDTO)));
+//    }
 
     @RequestMapping(value = "/name")
     public Author findByName() {

@@ -1,23 +1,29 @@
 package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
-import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.slf4j.profiler.Profiler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import szczyzanski.book.api.dto.BookDTO;
+import szczyzanski.book.api.dto.full.book.BookWithFullInfoDTO;
+import szczyzanski.book.api.dto.full.book.InnerAuthor;
+import szczyzanski.book.api.dto.full.book.InnerTag;
+import szczyzanski.book.domain.entities.Author;
 import szczyzanski.book.domain.entities.Book;
+import szczyzanski.book.domain.entities.Tag;
 import szczyzanski.book.services.AuthorService;
 import szczyzanski.book.services.BookService;
 import szczyzanski.book.services.ShelfService;
+import szczyzanski.book.services.TagService;
 import szczyzanski.exceptions.BNRecordParsingException;
-import szczyzanski.external.services.SuggestedTagGenerator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/books")
@@ -28,6 +34,8 @@ public class BookController {
     private ShelfService shelfService;
     @Autowired
     private AuthorService authorService;
+    @Autowired
+    private TagService tagService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -43,23 +51,39 @@ public class BookController {
     }
 
     @RequestMapping(value = "/isbn/{isbn}")
-    public BookDTO findByIsbn(@PathVariable long isbn) throws BNRecordParsingException, FileNotFoundException {
-        Book book = bookService.findOnBnCatalogByIsbn(isbn);
-        int repoSize = bookService.findAll().size();
+    @CrossOrigin(origins = "http://localhost:4200")
+    public BookWithFullInfoDTO findByIsbn(@PathVariable long isbn) throws BNRecordParsingException, FileNotFoundException {
+        BookWithFullInfoDTO bookWithFullInfoDTO = bookService.findOnBnCatalogByIsbn(isbn);
+        /*int repoSize = bookService.findAll().size();
         SuggestedTagGenerator stg = new SuggestedTagGenerator(book, repoSize);
         Profiler profiler = new Profiler("tag generator");
         profiler.start("tag print");
         stg.printSuggestedTags();
         System.out.println("***********************************************************************************");
         profiler.stop().print();
-        System.out.println("***********************************************************************************");
-        return entityToDTO(book);
+        System.out.println("***********************************************************************************");*/
+        return bookWithFullInfoDTO;
     }
 
-    @RequestMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public BookDTO findById(@PathVariable long id) {
         return entityToDTO(bookService.findById(id));
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public BookWithFullInfoDTO save(@RequestBody final BookWithFullInfoDTO bookWithFullInfoDTO) throws IOException {
+        Book book = convertFullInfoToBook(bookWithFullInfoDTO);
+        Set<Author> authors = convertFullInfoToAuthors(bookWithFullInfoDTO, book);
+        Set<Tag> tags = convertFullInfoToTags(bookWithFullInfoDTO, book);
+        book.setAuthorSet(authors);
+        book.setTagSet(tags);
+        bookService.save(book);
+        authorService.save(authors);
+        tagService.save(tags);
+        bookService.saveCovers(book);
+        return bookWithFullInfoDTO;
     }
 
     @RequestMapping(value = "/cover/n/{id}")
@@ -82,6 +106,50 @@ public class BookController {
             return null;
         }
         return modelMapper.map(book, BookDTO.class);
+    }
+
+    private Book convertFullInfoToBook(BookWithFullInfoDTO bookWithFullInfoDTO) {
+        Book book = new Book();
+        book.setIsbn(bookWithFullInfoDTO.getIsbn());
+        book.setNoOfPages(bookWithFullInfoDTO.getNoOfPages());
+        book.setOriginalTitle(bookWithFullInfoDTO.getOriginalTitle());
+        book.setOrigin(bookWithFullInfoDTO.getOrigin());
+        book.setPublisher(bookWithFullInfoDTO.getPublisher());
+        book.setTitle(bookWithFullInfoDTO.getTitle());
+        return book;
+    }
+
+    private Set<Author> convertFullInfoToAuthors(BookWithFullInfoDTO bookWithFullInfoDTO, Book book) {
+        Set<Author> authors = new HashSet<>();
+        List<InnerAuthor> innerAuthors = bookWithFullInfoDTO.getAuthors();
+        for(InnerAuthor innerAuthor : innerAuthors) {
+            Author author = convertInnerAuthorToAuthor(innerAuthor);
+            author.addBook(book);
+            authors.add(author);
+        }
+        return authors;
+    }
+
+    private Set<Tag> convertFullInfoToTags(BookWithFullInfoDTO bookWithFullInfoDTO, Book book) {
+        Set<Tag> tags = new HashSet<>();
+        Set<InnerTag> innerTags = bookWithFullInfoDTO.getTags();
+        for(InnerTag innerTag : innerTags) {
+            Tag tag = new Tag(innerTag.getValue(), null);
+            tag.addBook(book);
+            tags.add(tag);
+        }
+        return tags;
+    }
+
+    private Author convertInnerAuthorToAuthor(InnerAuthor innerAuthor) {
+        String name = innerAuthor.getName();
+        String[] nameSplitted = name.split("\\s+");
+        String forname = "";
+        for(int i = 0; i < nameSplitted.length - 1; i++) {
+            forname += nameSplitted[i];
+        }
+        String surname = nameSplitted[nameSplitted.length - 1];
+        return new Author(forname, surname, null);
     }
 
     @RequestMapping(value = "/test")
