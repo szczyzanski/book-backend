@@ -77,4 +77,8 @@ public class Tag {
                 ", value='" + value + '\'' +
                 '}';
     }
+
+    public int getBookSetPower() {
+        return this.getBookSet().size();
+    }
 }

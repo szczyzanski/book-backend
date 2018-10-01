@@ -14,6 +14,7 @@ import szczyzanski.external.services.HDDCoverHandler;
 import szczyzanski.external.services.LCCoverDownloader;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,9 +52,17 @@ public class BookService{
     public byte[] getCover(long id, int no) throws IOException {
         String pathname = "covers/" + id + "/" + no + ".jpg";
         File imageFile = new File(pathname);
-        InputStream in = new FileInputStream(imageFile);
-        //in.close();
-        return IOUtils.toByteArray(in);
+        try (InputStream in = new FileInputStream(imageFile)) {
+            return IOUtils.toByteArray(in);
+        }
+    }
+
+    public byte[] getErrorCover(int errorCode) throws IOException {
+        String pathname = "error/" + errorCode + ".jpg";
+        File imageFile = new File(pathname);
+        try (InputStream in = new FileInputStream(imageFile)) {
+            return IOUtils.toByteArray(in);
+        }
     }
 
     public Book save(Book book) {
@@ -61,6 +70,16 @@ public class BookService{
     }
 
     public void saveCovers(Book book) throws IOException {
-        HDDCoverHandler.handleCovers(book.getId());
+        HDDCoverHandler.saveCovers(book.getId());
+    }
+
+    public void deleteCovers() throws IOException {
+        HDDCoverHandler.clearCovers();
+    }
+
+    public List<Book> getLastNBooks(Long n) {
+        List books = bookRepository.getLastNBooks(n);
+        Collections.reverse(books);
+        return books;
     }
 }

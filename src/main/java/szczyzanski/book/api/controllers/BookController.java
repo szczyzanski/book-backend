@@ -1,11 +1,13 @@
 package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.slf4j.profiler.Profiler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import szczyzanski.book.api.dto.BookDTO;
+import szczyzanski.book.api.dto.StatusDTO;
 import szczyzanski.book.api.dto.full.book.BookWithFullInfoDTO;
 import szczyzanski.book.api.dto.full.book.InnerAuthor;
 import szczyzanski.book.api.dto.full.book.InnerTag;
@@ -86,6 +88,13 @@ public class BookController {
         return bookWithFullInfoDTO;
     }
 
+    @RequestMapping(value = "/cover/del", method = RequestMethod.POST, consumes = "application/json")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public StatusDTO deleteCovers() throws IOException {
+        bookService.deleteCovers();
+        return new StatusDTO("done", 1);
+    }
+
     @RequestMapping(value = "/cover/n/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public int getNoOfCovers(@PathVariable long id) {
@@ -101,6 +110,25 @@ public class BookController {
         return bookService.getCover(id, no);
     }
 
+    @GetMapping(
+            value = "/cover/error/{errorCode}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    @CrossOrigin(origins = "http://localhost:4200")
+    public byte[] getErrorCover(@PathVariable final int errorCode) throws IOException {
+        return bookService.getErrorCover(errorCode);
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<BookDTO> getLastFiveBooks() {
+        List<BookDTO> result = new ArrayList<>();
+        for(Book book : bookService.getLastNBooks(5L)) {
+            result.add(entityToDTO(book));
+        }
+        return result;
+    }
+
     private BookDTO entityToDTO(final Book book) {
         if(book == null) {
             return null;
@@ -108,6 +136,7 @@ public class BookController {
         return modelMapper.map(book, BookDTO.class);
     }
 
+    //TODO move converters to service?
     private Book convertFullInfoToBook(BookWithFullInfoDTO bookWithFullInfoDTO) {
         Book book = new Book();
         book.setIsbn(bookWithFullInfoDTO.getIsbn());
@@ -124,6 +153,10 @@ public class BookController {
         List<InnerAuthor> innerAuthors = bookWithFullInfoDTO.getAuthors();
         for(InnerAuthor innerAuthor : innerAuthors) {
             Author author = convertInnerAuthorToAuthor(innerAuthor);
+            Author existingAuthor = authorService.findByName(author.getForname(), author.getSurname());
+            if(existingAuthor != null) {
+                author = existingAuthor;
+            }
             author.addBook(book);
             authors.add(author);
         }
@@ -135,6 +168,10 @@ public class BookController {
         Set<InnerTag> innerTags = bookWithFullInfoDTO.getTags();
         for(InnerTag innerTag : innerTags) {
             Tag tag = new Tag(innerTag.getValue(), null);
+            Tag existingTag = tagService.findByValue(innerTag.getValue());
+            if(existingTag != null) {
+                tag = existingTag;
+            }
             tag.addBook(book);
             tags.add(tag);
         }

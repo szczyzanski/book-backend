@@ -2,12 +2,11 @@ package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import szczyzanski.book.api.dto.AuthorDTO;
+import szczyzanski.book.api.dto.AuthorWithBookSetPowerDTO;
 import szczyzanski.book.domain.entities.Author;
+import szczyzanski.book.domain.entities.AuthorWithBookSetPower;
 import szczyzanski.book.services.AuthorService;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ public class AuthorController {
     @Autowired
     private ModelMapper modelMapper;
 
-    //TODO add exceptions
     @RequestMapping(value = "/all")
     @CrossOrigin(origins = "http://localhost:4200")
     public List<AuthorDTO> findAll() {
@@ -35,25 +33,6 @@ public class AuthorController {
         }
         return result;
     }
-
-    //TODO add exceptions
-    @RequestMapping(value = "/savedef")
-    public void saveDefault() {
-        authorService.saveDefault();
-    }
-
-    //TODO add exceptions
-    @RequestMapping(value = "/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public AuthorDTO getOne(@PathVariable final Long id) {
-        return entityToDTO(authorService.getOne(id));
-    }
-
-//    //TODO add exceptions
-//    @RequestMapping(value = "/add")
-//    public AuthorDTO add(final AuthorDTO authorDTO) {
-//        return entityToDTO(authorService.add(DTOToEntity(authorDTO)));
-//    }
 
     @RequestMapping(value = "/name")
     public Author findByName() {
@@ -68,6 +47,23 @@ public class AuthorController {
             authors.add(entityToDTO(author));
         }
         return authors;
+    }
+
+    @RequestMapping(value = "/top")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Set<AuthorWithBookSetPowerDTO> getMostPopular() {
+        Set<AuthorWithBookSetPowerDTO> authors = new HashSet<>();
+        for(AuthorWithBookSetPower author : authorService.getMostPopular()) {
+            authors.add(entityToDTO(author));
+        }
+        return authors;
+    }
+
+    private AuthorWithBookSetPowerDTO entityToDTO(final AuthorWithBookSetPower author) {
+        if (author == null) {
+            return null;
+        }
+        return modelMapper.map(author, AuthorWithBookSetPowerDTO.class);
     }
 
     private AuthorDTO entityToDTO(final Author author) {

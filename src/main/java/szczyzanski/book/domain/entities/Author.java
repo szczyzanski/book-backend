@@ -10,7 +10,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "forname")
     private String forname;
@@ -58,6 +58,10 @@ public class Author {
 
     public void setBookSet(Set<Book> bookSet) {
         this.bookSet = bookSet;
+    }
+
+    public int getBookSetPower() {
+        return this.bookSet.size();
     }
 
     //todo error for null

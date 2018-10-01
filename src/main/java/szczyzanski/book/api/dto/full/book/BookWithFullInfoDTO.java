@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="isbn")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="isbn")
 public class BookWithFullInfoDTO {
     private Long isbn;
     private String title;

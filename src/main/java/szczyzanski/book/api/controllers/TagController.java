@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import szczyzanski.book.api.dto.TagDTO;
+import szczyzanski.book.api.dto.TagWithBookSetPowerDTO;
 import szczyzanski.book.domain.entities.Tag;
+import szczyzanski.book.domain.entities.TagWithBookSetPower;
 import szczyzanski.book.services.TagService;
 
 import java.util.ArrayList;
@@ -50,10 +52,26 @@ public class TagController {
         return authors;
     }
 
+    @RequestMapping(value = "/top")
+    public Set<TagWithBookSetPowerDTO> getMostPopular() {
+        Set<TagWithBookSetPowerDTO> tags = new HashSet<>();
+        for(TagWithBookSetPower tag : tagService.getMostPopular()) {
+            tags.add(entityToDTO(tag));
+        }
+        return tags;
+    }
+
     private TagDTO entityToDTO(Tag tag) {
         if(tag == null) {
             return null;
         }
         return modelMapper.map(tag, TagDTO.class);
+    }
+
+    private TagWithBookSetPowerDTO entityToDTO(TagWithBookSetPower tag) {
+        if(tag == null) {
+            return null;
+        }
+        return modelMapper.map(tag, TagWithBookSetPowerDTO.class);
     }
 }

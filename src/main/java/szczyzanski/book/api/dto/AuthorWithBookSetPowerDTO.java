@@ -1,20 +1,17 @@
 package szczyzanski.book.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import java.util.Set;
-
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class AuthorDTO {
+public class AuthorWithBookSetPowerDTO {
     private Long id;
     private String forname;
     private String surname;
-    @JsonManagedReference
-    private Set<BookDTO> bookSet;
+    private int bookSetPower;
+    private Long mainId;
 
-    AuthorDTO() {}
+    AuthorWithBookSetPowerDTO () {}
 
     public Long getId() {
         return id;
@@ -40,16 +37,19 @@ public class AuthorDTO {
         this.surname = surname;
     }
 
-    public Set<BookDTO> getBookSet() {
-        return bookSet;
+    public int getBookSetPower() {
+        return bookSetPower;
     }
 
-    public void setBookSet(Set<BookDTO> bookSet) {
-        this.bookSet = bookSet;
+    public void setBookSetPower(int bookSetPower) {
+        this.bookSetPower = bookSetPower;
     }
 
-    @Override
-    public String toString() {
-        return forname + " " + surname;
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
     }
 }
