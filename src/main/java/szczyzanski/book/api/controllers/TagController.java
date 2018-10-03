@@ -53,6 +53,7 @@ public class TagController {
     }
 
     @RequestMapping(value = "/top")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Set<TagWithBookSetPowerDTO> getMostPopular() {
         Set<TagWithBookSetPowerDTO> tags = new HashSet<>();
         for(TagWithBookSetPower tag : tagService.getMostPopular()) {

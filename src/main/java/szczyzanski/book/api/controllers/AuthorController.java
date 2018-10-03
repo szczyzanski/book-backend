@@ -34,11 +34,6 @@ public class AuthorController {
         return result;
     }
 
-    @RequestMapping(value = "/name")
-    public Author findByName() {
-        return authorService.findByName("Jason", "Mistyczny");
-    }
-
     @RequestMapping(value = "/book/{bookId}")
     @CrossOrigin(origins = "http://localhost:4200")
     public Set<AuthorDTO> findyByBookId(@PathVariable final long bookId) {

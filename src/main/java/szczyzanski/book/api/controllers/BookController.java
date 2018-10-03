@@ -1,7 +1,10 @@
 package szczyzanski.book.api.controllers;
 //TODO change from entities to DTOs
+import ch.qos.logback.classic.LoggerContext;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.profiler.Profiler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,10 +25,8 @@ import szczyzanski.exceptions.BNRecordParsingException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/books")
@@ -126,7 +127,8 @@ public class BookController {
         for(Book book : bookService.getLastNBooks(5L)) {
             result.add(entityToDTO(book));
         }
-        return result;
+        Collections.sort(result, Comparator.comparing(BookDTO::getId).reversed());
+        return result.stream().limit(5).collect(Collectors.toList());
     }
 
     private BookDTO entityToDTO(final Book book) {
@@ -189,12 +191,12 @@ public class BookController {
         return new Author(forname, surname, null);
     }
 
-    @RequestMapping(value = "/test")
-    public void testMethod() throws BNRecordParsingException {
+    @RequestMapping(value = "/test/{n}")
+    public void testMethod(@PathVariable final int n) throws BNRecordParsingException, IOException {
         long[] testArgumentList = {
                 9788365613059L,
-                9788308065105L,
                 9788365613608L,
+                9788308065105L,
                 9788328053571L,
                 9788308065228L,
                 9788365613622L,
@@ -403,16 +405,15 @@ public class BookController {
                 9788380492561L,
                 9788364648199L
         };
-        Profiler profiler = new Profiler("basic");
-        profiler.start("work");
-        for(long isbn : testArgumentList) {
+        /*for(long isbn : testArgumentList) {
             bookService.findOnBnCatalogByIsbn(isbn);
-        }
-        /*for(int i = 0; i < 10; i++) {
-            bookService.findOnBnCatalogByIsbn(testArgumentList[i]);
         }*/
-        System.out.println("***********************************************************************************");
-        profiler.stop().print();
-        System.out.println("***********************************************************************************");
+        bookService.deleteAll();
+        authorService.deleteAll();
+        tagService.deleteAll();
+        for(int i = 0; i < n; i++) {
+            BookWithFullInfoDTO book = bookService.findOnBnCatalogByIsbn(testArgumentList[i]);
+            save(book);
+        }
     }
 }

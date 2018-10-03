@@ -1,5 +1,7 @@
 package szczyzanski.book.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import szczyzanski.book.domain.entities.Author;
@@ -60,5 +62,10 @@ public class AuthorService {
 
     public List<AuthorWithBookSetPower> getMostPopular() {
         return (List) authorWithBookSetPowerRepository.findAll();
+    }
+
+    public void deleteAll() {
+        authorRepository.deleteAll();
+        authorWithBookSetPowerRepository.deleteAll();
     }
 }

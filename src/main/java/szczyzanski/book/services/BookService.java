@@ -82,4 +82,8 @@ public class BookService{
         Collections.reverse(books);
         return books;
     }
+
+    public void deleteAll() {
+        bookRepository.deleteAll();
+    }
 }

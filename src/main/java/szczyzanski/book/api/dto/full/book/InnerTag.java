@@ -16,4 +16,11 @@ public class InnerTag {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "InnerTag{" +
+                "value='" + value + '\'' +
+                '}';
+    }
 }

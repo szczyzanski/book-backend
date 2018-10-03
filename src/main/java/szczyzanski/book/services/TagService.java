@@ -35,7 +35,7 @@ public class TagService {
             tagRepository.save(tag);
             TagWithBookSetPower tagWithBookSetPower = tagWithBookSetPowerRepository
                                                         .findByValue(tag.getValue());
-            if(tagWithBookSetPowerRepository.count() > 9) {
+            if(tagWithBookSetPowerRepository.count() > 8) {
                 TagWithBookSetPower lastTag = tagWithBookSetPowerRepository.getTagWithLastBSPower();
                 if(tag.getBookSetPower() > lastTag.getBookSetPower()) {
                     if(tagWithBookSetPower == null) {
@@ -69,4 +69,8 @@ public class TagService {
         return (List) tagWithBookSetPowerRepository.findAll();
     }
 
+    public void deleteAll() {
+        tagWithBookSetPowerRepository.deleteAll();
+        tagRepository.deleteAll();
+    }
 }

@@ -70,7 +70,6 @@ public class LCCoverDownloader {
         if(file.startsWith("{")) {
             JsonObject jsonObject = Json.createReader(new StringReader(file)).readObject();
             for(String key : jsonObject.keySet()) {
-                System.out.println("WESZLO DO FORA " + key);
                 try {
                     String cover = jsonObject.getJsonObject(key).getString("cover").replace("50x75", "352x500");
                     try {
@@ -83,7 +82,6 @@ public class LCCoverDownloader {
                 }
             }
         } else if (file.startsWith("[")){
-            System.out.println("NIE WESZLO DO FORA");
             JsonArray jsonArray = Json.createReader(new StringReader(file)).readArray();
             for(JsonValue jsonValue : jsonArray) {
                 if(jsonValue instanceof JsonObject) {
@@ -92,9 +90,13 @@ public class LCCoverDownloader {
                         String cover =  jsonObject
                                         .getString("cover")
                                         .replace("50x75", "352x500");
-                        coverUrls.add(new URL(cover));
+                        if(cover.startsWith("http")) {
+                            coverUrls.add(new URL(cover));
+                        }
                     } catch (NullPointerException npe) {
                         System.out.println("rekord bez okladki");
+                    } catch (MalformedURLException e) {
+                        System.out.println("sprawdz url");
                     }
                 }
             }

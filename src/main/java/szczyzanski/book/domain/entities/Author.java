@@ -80,7 +80,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return forname + " " + surname;
+        return forname + " " + surname + " " + getBookSetPower();
     }
 
     public void addBook(Book book) {
